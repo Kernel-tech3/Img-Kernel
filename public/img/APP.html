@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apapacharte - Mates y Artículos</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        nav a {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .hero {
+            height: 50vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://github.com/Kernel-tech3/Img-Kernel/blob/main/public/img/logo-RESTAURADO.jpg?raw=true');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 3.5rem;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+            background-color: transparent;
+            padding: 1rem;
+            
+        }
+
+        .section-title {
+            text-align: center;
+            padding: 2rem 0;
+            color: #333;
+        }
+
+        .carousel-container {
+            position: relative;
+            padding: 0 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .carousel {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 1rem;
+        }
+
+        .card {
+            min-width: calc(100% - 2rem);
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-price {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2.5rem;
+            height: 2.5rem;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .carousel-prev {
+            left: 0;
+        }
+
+        .carousel-next {
+            right: 0;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: #333;
+        }
+
+        @media (min-width: 768px) {
+            .card {
+                min-width: calc(50% - 1rem);
+            }
+        }
+        footer {
+        background-color: #333;
+        color: white;
+        padding: 2rem 1rem;
+        margin-top: 3rem;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .footer-content {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .footer-section {
+        padding: 1rem;
+    }
+
+    .footer-section h3 {
+        color: #2ecc71;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .footer-section p {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .social-links a {
+        color: white;
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+        color: #2ecc71;
+    }
+
+    .contact-info {
+        list-style: none;
+        padding: 0;
+    }
+
+    .contact-info li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-info i {
+        color: #2ecc71;
+        width: 20px;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        margin-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.8rem;
+    }
+
+    .business-hours {
+        list-style: none;
+        padding: 0;
+    }
+
+    .business-hours li {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="https://www.instagram.com/apapacharte1/">Instagram</a>
+            <a href="https://wa.link/ccg6am">Contacto de whatsapp</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Bienvenido a Apapacharte</h1>
+    </section>
+
+    <main>
+        <section id="mates">
+            <h2 class="section-title">Mates</h2>
+            <div class="carousel-container">
+                <div class="carousel" id="mates-carousel"></div>
+                <button class="carousel-control carousel-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-control carousel-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <section id="termos">
+            <h2 class="section-title">Decoracion</h2>
+            <div class="carousel-container">
+                <div class="carousel" id="termos-carousel"></div>
+                <button class="carousel-control carousel-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-control carousel-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <section id="bombillas">
+            <h2 class="section-title">Articulos de navidad y velas</h2>
+            <div class="carousel-container">
+                <div class="carousel" id="bombillas-carousel"></div>
+                <button class="carousel-control carousel-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-control carousel-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <section id="yerbas">
+            <h2 class="section-title">Conjuntos y articulos para la cocina</h2>
+            <div class="carousel-container">
+                <div class="carousel" id="yerbas-carousel"></div>
+                <button class="carousel-control carousel-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-control carousel-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sobre Nosotros</h3>
+                <ul>
+                    <li>
+                        <p>En Apapacharte nos dedicamos a ofrecerte los mejores mates y accesorios para que disfrutes de la tradición del mate con calidad y estilo.</p>
+                    </li>
+                    <li>
+                        <p>Hola, soy Vale. Soy mamá, artesana, bailarina, docente, esposa, madre, hermana y amiga. Estoy atrás de cada diseño, cada foto, cada nuevo producto por que amo Apapacharte. Un proyecto que fue soñado toda mi vida y que lo pude llevar a la realidad en pandemia y con el gran empujón de una muy buena amiga. Amo esta idea y realizo cada trabajo con mucha dedicación y pasión como cada una de las cosas que hago en mi vida. En cada objeto hay magia, hay alma,  hay sueños y mucho amor, por que el arte quita del alma el polvo de la vida cotidiana.</p>
+                    </li>
+                </ul>
+                
+                
+                <div class="social-links">
+                    
+                    <a href="https://www.instagram.com/apapacharte1/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.link/ccg6am"><i class="fab fa-whatsapp"></i></a>
+                  
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Av. Siempreviva 123, Springfield</span>
+                    </li>
+                    
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>Vale3110@gmail.com</span>
+                    </li>
+                    <li>
+                        <i class="fab fa-whatsapp"></i>
+                        <span>+54 9 3515 47-4199</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Horarios de Atención</h3>
+                <ul class="business-hours">
+                    <li>
+                        <span>Lunes - Viernes:</span>
+                        <span>9:00 - 20:00</span>
+                    </li>
+                    <li>
+                        <span>Sábados:</span>
+                        <span>10:00 - 14:00</span>
+                    </li>
+                    <li>
+                        <span>Domingos:</span>
+                        <span>Cerrado</span>
+                    </li>
+                </ul>
+                <p style="margin-top: 1rem;">
+                    <i class="fas fa-info-circle"></i> Envíos a todo el Carlos Paz
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Apapacharte - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        // Datos de ejemplo para los productos
+        const productos = {
+            mates: [
+                { nombre: "Mate con diseño de ojos", precio: 5000, descripcion: "", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/mate1.jfif" },
+                { nombre: "Mate blanco con negro", precio: 3500, descripcion: "Mate resistente y duradero", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/mate2.jfif" },
+                { nombre: "Mate personalizado con un tejido", precio: 4200, descripcion: "Diseño creativo", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/mate3.jfif" },
+                { nombre: "Mate dalmata", precio: 3800, descripcion: "El mate mas llamativo", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/mate4.jfif" },
+                { nombre: "Mate con flores", precio: 6000, descripcion: "Mate de primavera", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/mate5.jfif" }
+            ],
+            termos: [
+                { nombre: "Cuadros de repisa", precio: 15000, descripcion: "Los cuadros mas resistentes", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/decoracion1.jfif" },
+                { nombre: "Casita decoracion", precio: 8000, descripcion: "Clásico argentino", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/decoracion2.jfif" },
+                { nombre: "Cuadro", precio: 12000, descripcion: "Ideal para camping", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/decoracion3.jfif" },
+                { nombre: "Llavero de cactus", precio: 13500, descripcion: "Diseño moderno", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/decoracion4.jfif" },
+                { nombre: "Cuadro con un cactus", precio: 9000, descripcion: "Excelente relación precio-calidad", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/decoracion%205.jfif" },
+                { nombre: "Cuadro Family", precio: 9000, descripcion: "Excelente relación precio-calidad", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/decoracion%206.jfif" }
+            ],
+            bombillas: [
+                { nombre: "pecebre", precio: 2500, descripcion: "Calidad premium", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/navidad1.jfif" },
+                { nombre: "pino de navidad", precio: 1800, descripcion: "Resistente y duradera", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/navidad%202.jfif" },
+                { nombre: "Pinos con distinto modelo", precio: 3500, descripcion: "Elegante y sofisticada", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/navidad3.jfif" },
+                { nombre: "Vela de flores", precio: 2800, descripcion: "Hecha a mano", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/vela1.jfif" },
+                { nombre: "Vela personalizada", precio: 2000, descripcion: "Diseño contemporáneo", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/vela2.jfif" }
+            ],
+            yerbas: [
+                { nombre: "Palo de amazar", precio: 1200, descripcion: "Sabor tradicional", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/articulos.jfif" },
+                { nombre: "Conjunto de tabla", precio: 1100, descripcion: "Yerba clásica", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/conjunto%203.jfif" },
+                { nombre: "Conjunto con bolso", precio: 1300, descripcion: "La más vendida", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/conjunto-bolso-mate.jfif" },
+                { nombre: "Conjunto de mate flores", precio: 1250, descripcion: "Suave y aromática", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/mate-conjunto.jfif" },
+                { nombre: "Apolla saumerio", precio: 1600, descripcion: "100% natural", imagen: "https://raw.githubusercontent.com/Kernel-tech3/Img-Kernel/refs/heads/main/public/img/saumerio1.jfif" }
+            ]
+        };
+
+        // Función para crear una tarjeta de producto
+        function createCard(producto) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            const img = document.createElement('img');
+            img.className = 'card-image';
+            img.src = producto.imagen;
+            img.alt = producto.nombre;
+            
+            const content = document.createElement('div');
+            content.className = 'card-content';
+            
+            const title = document.createElement('h3');
+            title.className = 'card-title';
+            title.textContent = producto.nombre;
+            
+            const price = document.createElement('p');
+            price.className = 'card-price';
+            price.textContent = `$${producto.precio}`;
+            
+            const description = document.createElement('p');
+            description.className = 'card-description';
+            description.textContent = producto.descripcion;
+            
+            content.appendChild(title);
+            content.appendChild(price);
+            content.appendChild(description);
+            
+            card.appendChild(img);
+            card.appendChild(content);
+            
+            return card;
+        }
+
+        // Función para inicializar un carrusel
+        function initializeCarousel(categoria) {
+            const carousel = document.getElementById(`${categoria}-carousel`);
+            const carouselInner = document.createElement('div');
+            carouselInner.className = 'carousel-inner';
+            
+            productos[categoria].forEach(producto => {
+                carouselInner.appendChild(createCard(producto));
+            });
+            
+            carousel.appendChild(carouselInner);
+
+            const prevBtn = carousel.parentElement.querySelector('.carousel-prev');
+            const nextBtn = carousel.parentElement.querySelector('.carousel-next');
+            
+            let currentSlide = 0;
+            const totalSlides = productos[categoria].length;
+            
+            function updateCarousel() {
+                const slideWidth = carousel.querySelector('.card').offsetWidth + 16; // 16 es el gap
+                carouselInner.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+            }
+            
+            prevBtn.addEventListener('click', () => {
+                currentSlide = Math.max(currentSlide - 1, 0);
+                updateCarousel();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                const maxSlide = window.innerWidth >= 768 ? totalSlides - 2 : totalSlides - 1;
+                currentSlide = Math.min(currentSlide + 1, maxSlide);
+                updateCarousel();
+            });
+
+            // Actualizar carrusel cuando cambia el tamaño de la ventana
+            window.addEventListener('resize', updateCarousel);
+        }
+
+        // Inicializar todos los carruseles
+        Object.keys(productos).forEach(categoria => {
+            initializeCarousel(categoria);
+        });
+    </script>
+</body>
+</html>
